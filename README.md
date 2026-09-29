@@ -1,4 +1,4 @@
-# Analizador-Lexico---Compiladores
+Analizador-Lexico  (Compiladores)
 Analizador léxico de LP
 
 Proyecto grupal del curso de **Compiladores — Fase 3**, desarrollado en **C++11**.
