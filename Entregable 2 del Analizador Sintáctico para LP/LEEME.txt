@@ -1,0 +1,63 @@
+ANALIZADOR SINTACTICO LP CORREGIDO
+
+REQUISITOS
+Windows de 64 bits para el ejecutable incluido.
+Para recompilar: g++ con soporte C++11 o posterior.
+
+EJECUTAR
+Abre una terminal dentro de la carpeta de este entregable.
+En PowerShell:
+.\Analizador_LP.exe ".\pruebas\prueba_calcular.lp"
+
+Prueba integral con funciones, arreglos y estructuras de control:
+.\Analizador_LP.exe ".\pruebas\prueba_integral.lp"
+
+Para analizar tu propio archivo:
+.\Analizador_LP.exe "C:\ruta\archivo.lp"
+
+COMPILAR
+g++ -std=c++11 -Wall -Wextra -pedantic Analizador_LP.cpp -o Analizador_LP.exe
+
+ARCHIVOS DE SALIDA
+Se escriben en la carpeta actual:
+tokens.txt: secuencia de tokens con linea y columna.
+tabla_simbolos.txt: identificadores encontrados por el lexer.
+errores.txt: errores detectados o mensaje Sin errores.
+ast.txt: representacion del arbol para programas aceptados.
+En una ejecucion rechazada, ast.txt queda vacio para evitar mostrar un
+arbol de una ejecucion anterior.
+Codigo de salida: 0 si acepta, 1 si rechaza o no puede abrir la entrada,
+2 si no puede preparar el archivo del AST.
+
+CAMBIOS
+1. Se distingue void main() de las declaraciones de funciones usando
+   un token de anticipacion.
+2. Se aceptan tanto main() como void main(), debido a la diferencia
+   entre la regla descrita y los ejemplos del documento.
+3. Se conservan los errores recuperados si despues falta una llave
+   u ocurre otro error que interrumpe el analisis.
+4. Se vacia el AST anterior al iniciar el analisis de un archivo legible.
+
+ORGANIZACION
+Analizador_LP.cpp contiene secciones separadas para lexer, nodos del AST,
+parser por descenso recursivo, salidas y programa principal.
+pruebas contiene solamente prueba_calcular.lp y prueba_integral.lp, ambos validos.
+Analizador_LP.exe fue compilado para Windows con enlace estatico.
+
+VALIDACION
+Compilado con C++11, -Wall -Wextra -pedantic sin advertencias.
+Se verificaron 15 casos durante el desarrollo; en esta entrega se incluyen solamente los dos archivos validos solicitados.
+Se comprobo la precedencia de multiplicacion sobre suma, asociatividad
+izquierda de resta, reporte de tres errores en comandos independientes,
+conservacion de errores previos al faltar una llave y AST vacio al rechazar.
+
+ALCANCE
+El programa analiza sintaxis; no ejecuta el programa LP ni valida tipos,
+declaracion de variables o correspondencia entre parametros y argumentos.
+Se conserva la gramatica implementada en el codigo recibido, salvo la
+compatibilidad documentada de void main(). Por ejemplo, los arreglos se
+declaran como int[5] datos y las llamadas usan func nombre(...).
+No se ha aportado el documento separado Gramatica_LP_LL1 mencionado en
+el codigo original, por lo que no se certifica equivalencia total con el.
+El informe del equipo y la sustentacion son evidencias
+que deben completarse aparte.
